@@ -1,13 +1,16 @@
-const express = require("express");
+import express from 'express';
+import path from 'path';
 
-// recordRoutes is an instance of the express router.
-// We use it to define our routes.
-// The router will be added as a middleware and will take control of requests starting with path /listings.
-const recordRoutes = express.Router();
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-recordRoutes.get('/', (req, res)=>{
-	res.status(200);
-	res.send("Welcome to root URL of Server");
-});
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-module.exports =recordRoutes;
+const router=express.Router()
+
+router.get('/',(req,res)=>{
+	res.sendFile(path.join(__dirname,'../templates/index.html'))
+})
+
+export { router };
