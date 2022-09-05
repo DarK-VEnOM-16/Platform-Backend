@@ -1,13 +1,18 @@
 
-const app = express();
-const PORT = 3000;
+const express = require('express');
+const path =require('path')
+const app =express()
 
-import recordRoutes from 'server/db/conn.js'
+app.use("/", require(path.join(__dirname,'routes/record.js')));
 
-app.listen(PORT, (error) =>{
-	if(!error)
-		console.log("Server is Successfully Running,and App is listening on port "+ PORT)
-	else
-		console.log("Error occurred, server can't start", error);
-	}
+
+const port = process.env.PORT || 5000;
+app.listen(port, () =>
+  console.log("Server up and running available at http://localhost:" + port)
 );
+
+app.use(function (req, res, next) {
+  next(createError(404));
+});
+
+
