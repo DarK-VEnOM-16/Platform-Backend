@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const connectDB = async () => {
     try{
-        const con = await mongoose.connect("mongodb+srv://thedrivesales:thedrivesales@beta-version.iyu63.mongodb.net/betaversion?retryWrites=true&w=majority", {
+        const con = await mongoose.connect(process.env.DB_CONNECT, {
             useNewUrlParser: true, 
             useUnifiedTopology: true,
         });
